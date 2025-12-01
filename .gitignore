@@ -1,0 +1,13 @@
+# 컴파일된 클래스 파일 무시
+*.class
+
+# 실행/빌드 폴더 무시
+bin/
+build/
+out/
+target/
+
+# IDE 설정 파일 무시
+.vscode/
+.idea/
+*.iml
