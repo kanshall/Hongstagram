@@ -13,7 +13,7 @@ public class Login extends JFrame {
         Container c = getContentPane();
         c.setLayout(null); 
 
-        // 1. ID 
+        // ID 
         JLabel idLabel = new JLabel("ID");
         idLabel.setBounds(50, 50, 80, 30);
         c.add(idLabel);
@@ -22,7 +22,7 @@ public class Login extends JFrame {
         idText.setBounds(140, 50, 100, 30);
         c.add(idText);
 
-        // 2. Password 
+        // Password 
         JLabel pwLabel = new JLabel("Password");
         pwLabel.setBounds(50, 100, 80, 30);
         c.add(pwLabel);
@@ -32,13 +32,13 @@ public class Login extends JFrame {
         pwText.addActionListener(e -> tryLogin()); // 엔터키 처리
         c.add(pwText);
 
-        // 3. 버튼들
+        // 버튼들
         JButton loginBtn = new JButton("로그인");
         loginBtn.setBounds(50, 150, 90, 30);
         loginBtn.addActionListener(e -> tryLogin());
         c.add(loginBtn);
         
-        // [추가] 회원가입 버튼
+        // 회원가입 버튼
         JButton joinBtn = new JButton("회원가입");
         joinBtn.setBounds(150, 150, 90, 30);
         joinBtn.addActionListener(e -> openJoinDialog());
@@ -49,7 +49,7 @@ public class Login extends JFrame {
         setVisible(true);
     }
 
-    // [추가] 회원가입 대화상자 열기
+    // 회원가입 대화상자 열기
     private void openJoinDialog() {
         JDialog d = new JDialog(this, "회원가입", true);
         d.setLayout(new FlowLayout());

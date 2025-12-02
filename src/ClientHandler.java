@@ -1,7 +1,7 @@
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 
-// [독립된 파일] 클라이언트 한 명을 전담하는 스레드
 public class ClientHandler extends Thread {
     private Socket socket;
     private DataInputStream in;
@@ -25,13 +25,13 @@ public class ClientHandler extends Thread {
         try {
             while (true) {
                 String msg = in.readUTF(); 
-                System.out.println("📩 받은 메시지: [" + msg + "]");
+                System.out.println("받은 메시지: [" + msg + "]");
 
                 String[] parts = msg.split("@@"); 
                 if (parts.length < 1) continue;
                 String command = parts[0];
 
-                // 1. 로그인
+                // 로그인
                 if (command.equals("LOGIN")) {
                     if (parts.length < 3) { out.writeUTF("LOGIN_FAIL"); continue; }
                     String uid = parts[1];
@@ -41,15 +41,14 @@ public class ClientHandler extends Thread {
                     if (userName != null) {
                         out.writeUTF("LOGIN_SUCCESS@@" + userName);
                         this.myId = uid;
-                        // [중요] HongstagramServer의 static 변수에 접근
                         HongstagramServer.onlineUsers.put(this.myId, this);
-                        System.out.println("✅ 접속자 등록: " + this.myId);
+                        System.out.println("접속자 등록: " + this.myId);
                     } else {
                         out.writeUTF("LOGIN_FAIL");
                     }
                 }
                 
-                // 2. 업로드
+                // 업로드
                 else if (command.equals("UPLOAD")) {
                     if (parts.length < 4) { out.writeUTF("UPLOAD_FAIL"); continue; }
                     String uid = parts[1];
@@ -57,36 +56,29 @@ public class ClientHandler extends Thread {
                     String imgPath = parts[3];
                     
                     boolean isSuccess = DBConnection.uploadPost(uid, content, imgPath);
-                    if (isSuccess) {
-                        out.writeUTF("UPLOAD_SUCCESS");
-                        System.out.println("✅ 업로드 성공: " + uid);
-                    } else {
-                        out.writeUTF("UPLOAD_FAIL");
-                    }
+                    if (isSuccess) out.writeUTF("UPLOAD_SUCCESS");
+                    else out.writeUTF("UPLOAD_FAIL");
                 }
 
-                // 3. 새로고침
+                // 새로고침
                 else if (command.equals("REFRESH")) {
                     String allPosts = DBConnection.getAllPosts();
                     out.writeUTF("REFRESH_DATA@@" + allPosts);
                 }
 
-                // 4. 채팅
+                // 1:1 채팅
                 else if (command.equals("CHAT")) {
                     String targetId = parts[1];
                     String chatMsg = parts[2];
-                    
                     DBConnection.saveMessage(this.myId, targetId, chatMsg);
-                    System.out.println("💾 채팅 저장완료: " + this.myId + " -> " + targetId);
-
-                    // [중요] Server의 onlineUsers 맵에서 찾기
+                    
                     ClientHandler target = HongstagramServer.onlineUsers.get(targetId);
                     if (target != null) {
                         target.sendMessage("CHAT_MSG@@" + this.myId + "@@" + chatMsg);
                     }
                 }
                 
-                // 5. 회원가입
+                // 회원가입
                 else if (command.equals("JOIN")) {
                      String uid = parts[1];
                      String upw = parts[2];
@@ -95,22 +87,104 @@ public class ClientHandler extends Thread {
                      out.writeUTF(ok ? "JOIN_SUCCESS" : "JOIN_FAIL");
                 }
 
-                // 6. 채팅 목록 요청
+                // 채팅 목록 요청
                 else if (command.equals("GET_CHAT_LIST")) {
                     String userList = DBConnection.getChatList(this.myId);
                     out.writeUTF("CHAT_LIST_DATA@@" + userList);
                 }
 
-                // 7. 대화 기록 요청
+                // 대화 기록 요청 (개인/그룹 분기)
                 else if (command.equals("GET_HISTORY")) {
                     String targetId = parts[1];
-                    String history = DBConnection.getChatHistory(this.myId, targetId);
+                    String history = "";
+                    if (targetId.startsWith("GROUP_")) {
+                        try {
+                            int rId = Integer.parseInt(targetId.substring(6));
+                            history = DBConnection.getGroupChatHistory(rId);
+                        } catch(Exception e){}
+                    } else {
+                        history = DBConnection.getChatHistory(this.myId, targetId);
+                    }
                     out.writeUTF("HISTORY_DATA@@" + targetId + "@@" + history);
+                }
+
+                // 로그아웃
+                else if (command.equals("LOGOUT")) {
+                    System.out.println("로그아웃: " + myId);
+                    break; 
+                }
+
+                // 계정 탈퇴
+                else if (command.equals("DELETE_USER")) {
+                    boolean isDeleted = DBConnection.deleteUser(this.myId);
+                    if (isDeleted) {
+                        out.writeUTF("DELETE_SUCCESS");
+                        HongstagramServer.onlineUsers.remove(this.myId);
+                        break; 
+                    } else {
+                        out.writeUTF("DELETE_FAIL");
+                    }
+                }
+
+                // 전체 유저 목록 요청
+                else if (command.equals("GET_ALL_USERS")) {
+                    String users = DBConnection.getAllUsers(this.myId);
+                    out.writeUTF("ALL_USERS_DATA@@" + users);
+                }
+
+                // 방 만들기 요청
+                // 초대된 사람들에게 알림 기능
+                else if (command.equals("CREATE_GROUP")) {
+                    String roomName = parts[1];
+                    String membersStr = parts[2]; // "철수,영희,민수"
+                    
+                    int roomId = DBConnection.createGroupRoom(roomName, this.myId, membersStr);
+                    
+                    if (roomId != -1) {
+                        out.writeUTF("GROUP_CREATED@@" + roomId + "@@" + roomName);
+                        
+                        // 초대된 멤버들에게 실시간 갱신
+                        // 방금 만든 방의 모든 멤버 리스트를 DB에서 가져옴
+                        ArrayList<String> allMembers = DBConnection.getRoomMembers(roomId);
+                        
+                        for (String memberId : allMembers) {
+                            if (memberId.equals(this.myId)) continue;
+                            
+                            // 접속해 있는 멤버 찾기
+                            ClientHandler target = HongstagramServer.onlineUsers.get(memberId);
+                            if (target != null) {
+                                // 상대방 목록 새로고침
+                                String newList = DBConnection.getChatList(memberId);
+                                target.sendMessage("CHAT_LIST_DATA@@" + newList);
+                                System.out.println("🔔 초대 알림 전송: " + memberId);
+                            }
+                        }
+                    } else {
+                        out.writeUTF("GROUP_FAIL");
+                    }
+                }
+
+                // 그룹 메시지 전송
+                else if (command.equals("GROUP_MSG")) {
+                    int roomId = Integer.parseInt(parts[1]);
+                    String groupMsg = parts[2]; // 변수명 충돌 방지
+                    
+                    DBConnection.saveGroupMessage(this.myId, roomId, groupMsg);
+                    
+                    ArrayList<String> members = DBConnection.getRoomMembers(roomId);
+                    for (String memberId : members) {
+                        ClientHandler target = HongstagramServer.onlineUsers.get(memberId);
+                        if (target != null) {
+                            target.sendMessage("GROUP_CHAT_MSG@@" + roomId + "@@" + this.myId + "@@" + groupMsg);
+                        }
+                    }
                 }
             }
         } catch (Exception e) {
-            System.out.println("⚠️ 퇴장: " + myId);
+            System.out.println("비정상 종료: " + myId);
+        } finally {
             if(myId != null) HongstagramServer.onlineUsers.remove(myId);
+            try { if (socket != null) socket.close(); } catch (IOException e) {}
         }
     }
 }

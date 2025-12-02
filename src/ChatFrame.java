@@ -17,13 +17,13 @@ public class ChatFrame extends JFrame {
         setTitle(targetId + "님과의 대화");
         setLayout(new BorderLayout());
 
-        // 1. 대화 내용 (수정 불가)
+        // 대화 내용 
         textArea = new JTextArea();
         textArea.setEditable(false);
         textArea.setFont(new Font("Malgun Gothic", Font.PLAIN, 14));
         add(new JScrollPane(textArea), BorderLayout.CENTER);
 
-        // 2. 입력창
+        // 입력창
         JPanel bottomPanel = new JPanel(new BorderLayout());
         inputField = new JTextField();
         inputField.setFont(new Font("Malgun Gothic", Font.PLAIN, 14));
@@ -49,6 +49,9 @@ public class ChatFrame extends JFrame {
 
         textArea.append("[나] " + msg + "\n");
         mainFrame.sendChatMessage(targetId, msg);
+        
+        mainFrame.requestChatList(); 
+        
         inputField.setText(""); 
     }
 
@@ -57,12 +60,14 @@ public class ChatFrame extends JFrame {
         textArea.setCaretPosition(textArea.getDocument().getLength());
     }
     
-    // [추가] 화면 싹 비우기 (과거 기록 불러올 때 사용)
+    // 화면 싹 비우기
+    // 과거 기록 불러올 때 사용
     public void clearArea() {
         textArea.setText("");
     }
     
-    // [추가] 메시지 한 줄 추가 (DB 기록 넣을 때 사용)
+    // 메시지 한 줄 추가
+    // DB 기록 넣을 때 사용
     public void appendMsg(String msg) {
         textArea.append(msg);
         textArea.setCaretPosition(textArea.getDocument().getLength());
