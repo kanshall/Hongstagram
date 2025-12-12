@@ -1,0 +1,139 @@
+.root {
+    -fx-bg-primary: #121212;
+    -fx-bg-secondary: #000000;
+    -fx-bg-panel: #1e1e1e;
+    -fx-text-primary: #e0e0e0;
+    -fx-text-secondary: #a0a0a0;
+    -fx-accent-color: #bb86fc;
+    /* Gentle Purple */
+    -fx-accent-hover: #9965f4;
+    -fx-main-border-color: #333333;
+}
+
+.scroll-bar:vertical .thumb,
+.scroll-bar:horizontal .thumb {
+    -fx-background-color: #bb86fc;
+    -fx-background-color: #bb86fc;
+    -fx-opacity: 0.5;
+}
+
+/* Ensure TextField has dark background in Dark theme */
+.text-field {
+    -fx-background-color: #333333;
+    -fx-background-color: #333333;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #aaaaaa;
+}
+
+/* Chat Root */
+.chat-root {
+    -fx-background-color: #121212;
+    -fx-background-color: #121212;
+}
+
+/* Chat Input Field */
+.chat-input {
+    -fx-background-color: #1e1e1e;
+    -fx-background-color: #1e1e1e;
+    -fx-text-fill: white;
+    -fx-border-color: #333333;
+}
+
+/* Chat Area specific */
+.chat-area {
+    -fx-control-inner-background: #1e1e1e;
+    -fx-text-fill: white;
+    -fx-background-color: #1e1e1e;
+    -fx-control-inner-background: #1e1e1e;
+    -fx-text-fill: white;
+    -fx-background-color: #1e1e1e;
+}
+
+.chat-area .content {
+    -fx-background-color: #1e1e1e;
+}
+
+/* Button Primary for Dark Theme */
+.btn-primary {
+    -fx-background-color: #bb86fc;
+    -fx-background-color: #bb86fc;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #9965f4;
+    -fx-background-color: #9965f4;
+}
+
+/* Chat List Panel */
+.chat-list-panel {
+    -fx-background-color: #1e1e1e;
+    -fx-background-color: #1e1e1e;
+    -fx-border-color: #333333;
+}
+
+.chat-list-title {
+    -fx-text-fill: #e0e0e0;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* Chat List Items */
+.chat-list-item {
+    -fx-background-color: transparent;
+    -fx-background-color: transparent;
+    -fx-text-fill: #e0e0e0;
+    -fx-border-color: #333333;
+    -fx-border-width: 0 0 1 0;
+    -fx-font-size: 14px;
+    -fx-padding: 10;
+}
+
+.chat-list-item:hover {
+    -fx-background-color: #333333;
+    -fx-background-color: #333333;
+}
+
+/* New Chat Button */
+.new-chat-btn {
+    -fx-text-fill: #bb86fc;
+    -fx-text-fill: #bb86fc;
+    -fx-font-weight: bold;
+    -fx-background-color: transparent;
+}
+
+.new-chat-btn:hover {
+    -fx-background-color: rgba(187, 134, 252, 0.1);
+    -fx-background-color: rgba(187, 134, 252, 0.1);
+}
+
+/* Visibility Fixes */
+.section-title {
+    -fx-text-fill: white;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.profile-name {
+    -fx-text-fill: white;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.stat-count {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+
+.stat-label {
+    -fx-text-fill: #a0a0a0;
+    -fx-text-fill: #a0a0a0;
+    -fx-font-size: 12px;
+}

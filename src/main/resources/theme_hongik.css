@@ -1,0 +1,225 @@
+.root {
+    -fx-bg-primary: linear-gradient(to bottom right, #002c5f, #001f44);
+    /* Hongik Navy Gradient */
+    -fx-bg-secondary: transparent;
+    /* Allow gradient to show through if needed */
+    -fx-bg-panel: rgba(255, 255, 255, 0.95);
+    /* Slightly transparent white for glass effect */
+
+    -fx-text-primary: #002c5f;
+    /* Navy Text */
+    -fx-text-secondary: #555555;
+
+    -fx-accent-color: #ffc20e;
+    /* Hongik Yellow */
+    -fx-accent-hover: #ffd700;
+
+    -fx-main-border-color: #002c5f;
+    -fx-font-family: 'Malgun Gothic', serif;
+    /* More Academic feel */
+}
+
+/* Background Override for Main Container to show Gradient */
+.main-container {
+    -fx-background-color: -fx-bg-primary;
+    -fx-background-color: -fx-bg-primary;
+}
+
+/* Buttons in Hongik Theme */
+.btn-primary {
+    -fx-background-color: #ffc20e;
+    /* Explicit Background */
+    -fx-background-color: #ffc20e;
+    /* Explicit Background */
+    -fx-text-fill: #002c5f;
+    /* Navy text on Yellow button */
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 5, 0, 0, 2);
+}
+
+.logo-text {
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 3, 0, 2, 2);
+}
+
+/* Specific overrides for Dark/Navy background integration */
+.login-container {
+    -fx-background-color: -fx-bg-primary;
+    -fx-background-color: -fx-bg-primary;
+    /* Fallback for IDE */
+    -fx-background-color: #ffc20e;
+    /* Yellow Scrollbar */
+    -fx-opacity: 0.7;
+}
+
+/* Header & Footer Gradients for Hongik Theme */
+.top-panel,
+.bottom-panel {
+    -fx-background-color: linear-gradient(to right, #002c5f, #001f44);
+    -fx-background-color: linear-gradient(to right, #002c5f, #001f44);
+    -fx-border-color: #001f44;
+}
+
+.top-panel .label {
+    -fx-text-fill: white;
+}
+
+.top-panel .btn-icon,
+.bottom-panel .btn-icon {
+    -fx-text-fill: white;
+}
+
+.bottom-panel .btn-icon:hover {
+    -fx-text-fill: #ffc20e;
+    -fx-text-fill: #ffc20e;
+    /* Hover turns Yellow */
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Settings Panel Card for Hongik Theme */
+.settings-panel {
+    -fx-background-color: -fx-bg-panel;
+    -fx-background-color: -fx-bg-panel;
+    /* White Glass */
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 4);
+    -fx-padding: 30;
+}
+
+/* Input fields in Login Screen for Hongik Theme */
+.login-container .text-field {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #cccccc;
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+    -fx-border-radius: 20;
+}
+
+.login-container .text-field:focused {
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+    -fx-border-color: #ffc20e;
+    /* Yellow accent */
+}
+
+.login-container .btn-secondary {
+    -fx-text-fill: rgba(255, 255, 255, 0.7);
+    -fx-text-fill: rgba(255, 255, 255, 0.7);
+    -fx-background-color: transparent;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.login-container .btn-secondary:hover {
+    -fx-text-fill: #ffc20e;
+    -fx-text-fill: #ffc20e;
+    -fx-underline: true;
+}
+
+/* Chat Root for Hongik Theme */
+.chat-root {
+    -fx-background-color: linear-gradient(to bottom right, #002c5f, #001f44);
+    -fx-background-color: linear-gradient(to bottom right, #002c5f, #001f44);
+}
+
+/* Chat Input for Hongik Theme */
+.chat-input {
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    /* Visible background */
+    -fx-text-fill: #002c5f;
+    -fx-border-color: silver;
+    -fx-background-radius: 5px;
+}
+
+/* Chat Area specific for Hongik Theme */
+.chat-area {
+    -fx-control-inner-background: rgba(255, 255, 255, 0.8);
+    -fx-control-inner-background: rgba(255, 255, 255, 0.8);
+    -fx-text-fill: #002c5f;
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+
+}
+
+.chat-area .content {
+    -fx-background-color: transparent;
+}
+
+/* Chat List Panel */
+.chat-list-panel {
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 0);
+    -fx-padding: 10;
+}
+
+.chat-list-title {
+    -fx-text-fill: #002c5f;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* Chat List Items */
+.chat-list-item {
+    -fx-background-color: transparent;
+    -fx-background-color: transparent;
+    -fx-text-fill: #002c5f;
+    -fx-border-color: #eeeeee;
+    -fx-border-width: 0 0 1 0;
+    -fx-font-size: 14px;
+    -fx-padding: 10;
+}
+
+.chat-list-item:hover {
+    -fx-background-color: rgba(0, 44, 95, 0.1);
+    -fx-background-color: rgba(0, 44, 95, 0.1);
+}
+
+/* New Chat Button */
+.new-chat-btn {
+    -fx-text-fill: #002c5f;
+    -fx-text-fill: #002c5f;
+    -fx-font-weight: bold;
+    -fx-background-color: transparent;
+}
+
+.new-chat-btn:hover {
+    -fx-background-color: rgba(0, 44, 95, 0.1);
+    -fx-background-color: rgba(0, 44, 95, 0.1);
+}
+
+/* Visibility Fixes for Dark Background Areas */
+.section-title {
+    -fx-text-fill: white;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 3, 0, 0, 1);
+}
+
+.profile-name {
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 3, 0, 0, 1);
+}
+
+.stat-count {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 2, 0, 0, 1);
+}
+
+.stat-label {
+    -fx-text-fill: #cccccc;
+    -fx-font-size: 12px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 2, 0, 0, 1);
+}
+
+.login-subtitle {
+    -fx-text-fill: white;
+}

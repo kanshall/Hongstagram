@@ -1,0 +1,166 @@
+/* Base Variables (Default Light Theme) */
+.root {
+    -fx-bg-primary: #ffffff;
+    -fx-bg-secondary: #fafafa;
+    -fx-bg-panel: #ffffff;
+    -fx-text-primary: #262626;
+    -fx-text-secondary: #8e8e8e;
+    -fx-accent-color: #0095f6;
+    /* Instagram Blue */
+    -fx-accent-hover: #1877f2;
+    -fx-main-border-color: #dbdbdb;
+    -fx-font-family: 'Malgun Gothic', 'Segoe UI', sans-serif;
+}
+
+/* General Layout */
+.main-container {
+    -fx-background-color: -fx-bg-secondary;
+    /* Variable not supported in standard CSS usually, defaulting to literal or ignoring logic */
+}
+
+.top-panel {
+    -fx-background-color: -fx-bg-panel;
+    -fx-border-color: -fx-main-border-color;
+    -fx-border-width: 0 0 1 0;
+}
+
+.bottom-panel {
+    -fx-background-color: -fx-bg-panel;
+    -fx-border-color: -fx-main-border-color;
+    -fx-border-width: 1 0 0 0;
+}
+
+/* --- Modern Scrollbar --- */
+.scroll-bar:vertical,
+.scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical .thumb,
+.scroll-bar:horizontal .thumb {
+    -fx-background-color: -fx-text-secondary;
+    -fx-background-insets: 2;
+    -fx-background-radius: 5em;
+    -fx-opacity: 0.5;
+}
+
+.scroll-bar:vertical .thumb:hover,
+.scroll-bar:horizontal .thumb:hover {
+    -fx-opacity: 0.8;
+}
+
+/* --- Buttons --- */
+.btn-primary {
+    -fx-background-color: -fx-accent-color;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    /* Rounder */
+    -fx-padding: 8 15 8 15;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 3, 0, 0, 1);
+}
+
+.btn-primary:pressed {
+    -fx-background-color: -fx-accent-hover;
+    -fx-translate-y: 1;
+    /* Click effect */
+}
+
+.btn-primary:hover {
+    -fx-background-color: -fx-accent-hover;
+}
+
+.btn-secondary {
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-text-primary;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-background-radius: 8px;
+    -fx-padding: 8 15 8 15;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: rgba(128, 128, 128, 0.1);
+}
+
+.btn-icon {
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-text-primary;
+    -fx-font-family: 'Segoe MDL2 Assets';
+    /* Windows System Icons */
+    -fx-font-size: 22px;
+    -fx-cursor: hand;
+    -fx-padding: 10;
+    -fx-background-radius: 50%;
+}
+
+.btn-icon:hover {
+    -fx-background-color: rgba(128, 128, 128, 0.1);
+}
+
+/* --- Text Fields --- */
+.text-field {
+    -fx-background-color: -fx-bg-secondary;
+    -fx-border-color: -fx-main-border-color;
+    -fx-border-width: 1;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 10;
+    -fx-text-fill: -fx-text-primary;
+    -fx-prompt-text-fill: -fx-text-secondary;
+}
+
+.text-field:focused {
+    -fx-border-color: -fx-accent-color;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 149, 246, 0.3), 5, 0, 0, 0);
+}
+
+/* --- Feed Post Card --- */
+.post-card {
+    -fx-background-color: -fx-bg-panel;
+    -fx-border-color: -fx-main-border-color;
+    -fx-border-width: 1;
+    -fx-background-radius: 10px;
+    /* Modern rounding */
+    -fx-border-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.05), 10, 0, 0, 4);
+    /* Softer, larger shadow */
+    -fx-padding: 5;
+}
+
+.post-header {
+    -fx-padding: 10;
+    -fx-alignment: center-left;
+}
+
+.post-content {
+    -fx-padding: 10;
+}
+
+.lbl-username {
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-text-primary;
+    -fx-font-size: 14px;
+}
+
+/* --- Login Screen --- */
+.login-container {
+    -fx-background-color: -fx-bg-primary;
+    -fx-alignment: center;
+    -fx-spacing: 20;
+}
+
+.logo-text {
+    -fx-font-family: 'Segoe Script', 'Brush Script MT', cursive;
+    -fx-font-size: 48px;
+    -fx-text-fill: -fx-text-primary;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 2, 0, 2, 2);
+}
+
+/* Login Subtitle */
+.login-subtitle {
+    -fx-text-fill: -fx-text-secondary;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
